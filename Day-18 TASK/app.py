@@ -43,9 +43,12 @@ def main():
         input_data = pd.get_dummies(input_data)
         input_data = input_data.reindex(columns=model.feature_names_in_, fill_value=0)
         prediction = model.predict(input_data)
-        if prediction[0] == 1:
-            st.error("The customer is likely to churn.")
-        else:
-            st.success("The customer is unlikely to churn.")
+
+st.write("Prediction Value:", prediction[0])
+
+if prediction[0] == 1:
+    st.error("The customer is likely to churn.")
+else:
+    st.success("The customer is unlikely to churn.")
 if __name__ == "__main__":
     main()

@@ -7,7 +7,7 @@ import pickle
 model_path = os.path.join(os.path.dirname(__file__), "churn_model.pkl")
 model = pickle.load(open(model_path, "rb"))
 def main():
-    st.title("Customer Churn Prediction")
+    st.title("Telecom Customer Churn Prediction")
     st.write("Enter the most important customer details to predict churn.")
     gender = st.selectbox("Gender", ["Male", "Female"])
     senior_citizen = st.selectbox("Senior Citizen", ["Yes", "No"])
@@ -44,9 +44,7 @@ def main():
         input_data = input_data.reindex(columns=model.feature_names_in_, fill_value=0)
         prediction = model.predict(input_data)
 
-        st.write("Prediction Value:", prediction[0])
-
-        if prediction[0] == 1:
+        if prediction[0] == "Yes":
             st.error("The customer is likely to churn.")
         else:
             st.success("The customer is unlikely to churn.")

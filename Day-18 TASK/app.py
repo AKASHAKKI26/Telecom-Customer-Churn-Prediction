@@ -2,13 +2,13 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import pickle
-# Load the trained model
-model = pickle.load(open('churn_model.pkl', 'rb'))
-# Define the Streamlit app
+import os
+import pickle
+model_path = os.path.join(os.path.dirname(__file__), "churn_model.pkl")
+model = pickle.load(open(model_path, "rb"))
 def main():
     st.title("Customer Churn Prediction")
     st.write("Enter the most important customer details to predict churn.")
-    # Keep only the most important input fields
     gender = st.selectbox("Gender", ["Male", "Female"])
     senior_citizen = st.selectbox("Senior Citizen", ["Yes", "No"])
     tenure = st.number_input("Tenure (months)", min_value=0, max_value=72, value=0)
